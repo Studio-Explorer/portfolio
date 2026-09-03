@@ -1,11 +1,26 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Cloud, Database, Lock, Monitor, ExternalLink, Github, ArrowRight, X, Cpu, GitBranch, Workflow, Container, Zap, Activity, Network } from 'lucide-react'
+import { Cloud, Database, Lock, Monitor, ExternalLink, Github, ArrowRight, X, Cpu, GitBranch, Workflow, Container, Zap, Activity, Network, type LucideIcon } from 'lucide-react'
 import { useState } from 'react'
 
+type Project = {
+  id: number
+  title: string
+  technologies: string[]
+  problem: string
+  solution: string
+  github: string
+  demo: string
+  architecture: {
+    name: string
+    description: string
+    icon: LucideIcon
+  }[]
+}
+
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   const projects = [
     {

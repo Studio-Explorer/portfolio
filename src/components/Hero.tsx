@@ -37,10 +37,7 @@ export default function Hero() {
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-cloud-accent rounded-full opacity-20"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
+            initial={{ x: 0, y: 0 }}
             animate={{
               y: [0, -100],
               opacity: [0.2, 0.5, 0.2],
@@ -49,6 +46,10 @@ export default function Hero() {
               duration: Math.random() * 10 + 10,
               repeat: Infinity,
               delay: Math.random() * 5,
+            }}
+            style={{
+              left: `${(i * 37) % 100}%`,
+              top: `${(i * 61) % 100}%`,
             }}
           />
         ))}
