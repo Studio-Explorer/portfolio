@@ -374,7 +374,7 @@ export default function LearningJourney() {
           >
             <Award className="w-16 h-16 text-cloud-accent" />
           </motion.div>
-          <h3 className="text-3xl font-bold text-white mb-2">PG Graduation 2027</h3>
+          <h3 className="text-3xl font-bold text-white mb-2">PG Graduation 2028</h3>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Major milestone achieved! Post Graduation completed with focus on Cloud Computing and DevOps. 
             Ready to take on challenging roles in cloud engineering.
