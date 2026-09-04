@@ -45,7 +45,7 @@ export default function SkillsDashboard() {
       { threshold: 0.3 }
     )
 
-    const section = document.getElementById('skills-dashboard')
+    const section = document.getElementById('skills')
     if (section) {
       observer.observe(section)
     }
@@ -54,7 +54,7 @@ export default function SkillsDashboard() {
   }, [])
 
   return (
-    <section id="skills-dashboard" className="py-20 px-4 bg-gradient-to-b from-transparent to-cloud-darker">
+    <section id="skills" className="py-20 px-4 bg-gradient-to-b from-transparent to-cloud-darker">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ export default function SkillsDashboard() {
         {/* Additional metrics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
           {[
-            { label: 'Projects', value: '15', icon: FolderKanban },
+            { label: 'Projects', value: '5', icon: FolderKanban },
             { label: 'Certifications', value: '5', icon: Award },
             { label: 'Years Exp', value: '2+', icon: Calendar },
             { label: 'Contributions', value: '500+', icon: GitBranch },

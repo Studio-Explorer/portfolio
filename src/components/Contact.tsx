@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Linkedin, Github, FileText, Send, MapPin, Phone, Twitter, Instagram } from 'lucide-react'
+import { Mail, Linkedin, Github, FileText, Send, MapPin, Phone } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Contact() {
@@ -23,14 +23,14 @@ export default function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'laxmikant@example.com',
-      href: 'mailto:laxmikant@example.com',
+      value: 'razzkumarpadhi@gmail.com',
+      href: 'mailto:razzkumarpadhi@gmail.com',
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: '/in/laxmikant',
-      href: 'https://linkedin.com/in/laxmikant',
+      value: '/in/laxmikant-padhy-572b4441b/',
+      href: 'https://www.linkedin.com/in/laxmikant-padhy-572b4441b/',
     },
     {
       icon: Github,
@@ -181,57 +181,14 @@ export default function Contact() {
         >
           <p className="text-gray-400 mb-4">Prefer to reach out directly?</p>
           <a
-            href="mailto:laxmikant@example.com"
+            href="mailto:razzkumarpadhi@gmail.com"
             className="inline-flex items-center gap-2 px-8 py-4 glass rounded-xl hover:bg-white/10 transition-colors"
           >
             <Mail className="w-5 h-5 text-cloud-accent" />
-            <span className="text-white font-semibold">laxmikant@example.com</span>
+            <span className="text-white font-semibold">razzkumarpadhi@gmail.com</span>
           </a>
         </motion.div>
 
-        {/* Social Media Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12"
-        >
-          <div className="glass rounded-2xl p-8 text-center">
-            <div className="flex flex-wrap justify-center gap-6">
-              {[
-                { icon: Github, label: 'GitHub', href: 'https://github.com/yourusername', hoverColor: 'group-hover:text-white' },
-                { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/yourusername', hoverColor: 'group-hover:text-blue-400' },
-                { icon: Mail, label: 'Email', href: 'mailto:laxmikant@example.com', hoverColor: 'group-hover:text-cloud-accent' },
-                { icon: Twitter, label: 'Twitter', href: 'https://twitter.com/yourusername', hoverColor: 'group-hover:text-cyan-400' },
-                { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/yourusername', hoverColor: 'group-hover:text-pink-400' },
-              ].map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                  whileHover={{ scale: 1.2, y: -5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="flex flex-col items-center gap-2 p-4 glass rounded-xl transition-all group"
-                >
-                  <social.icon className={`w-8 h-8 text-gray-400 ${social.hoverColor} transition-colors`} />
-                  <span className="text-xs text-gray-400 group-hover:text-white transition-colors">{social.label}</span>
-                </motion.a>
-              ))}
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-white/10">
-              <p className="text-gray-400 text-sm">
-                Available for remote opportunities worldwide. Let's build something amazing together! ☁️
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

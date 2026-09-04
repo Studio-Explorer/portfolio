@@ -42,7 +42,7 @@ export default function Navbar() {
           >
             <Cloud className="w-8 h-8 text-cloud-accent" />
             <span className="text-xl font-bold bg-gradient-to-r from-white to-cloud-accent bg-clip-text text-transparent">
-              Laxmikant
+              CloudStack
             </span>
           </motion.div>
 

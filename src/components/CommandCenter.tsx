@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Cloud, X, Activity, FolderKanban, Cpu, GitBranch, FileText, Maximize2, Minimize2 } from 'lucide-react'
+import { Cloud, X, Activity, FolderKanban, Cpu, GitBranch, Maximize2, Minimize2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export default function CommandCenter() {
@@ -13,7 +13,6 @@ export default function CommandCenter() {
     { id: 'projects', label: 'Projects', icon: FolderKanban },
     { id: 'skills', label: 'Skills', icon: Cpu },
     { id: 'github', label: 'GitHub', icon: GitBranch },
-    { id: 'resume', label: 'Resume', icon: FileText },
   ]
 
   const dashboardData = {
@@ -21,7 +20,7 @@ export default function CommandCenter() {
       title: 'System Overview',
       metrics: [
         { label: 'AWS Status', value: 'Connected', status: 'operational' },
-        { label: 'Projects', value: '15', status: 'active' },
+        { label: 'Projects', value: '5', status: 'active' },
         { label: 'GitHub', value: 'Active', status: 'connected' },
         { label: 'CI/CD', value: 'Operational', status: 'running' },
       ],
@@ -52,14 +51,6 @@ export default function CommandCenter() {
         { label: 'Stars', value: 150 },
         { label: 'Forks', value: 45 },
         { label: 'Contributions', value: 500 },
-      ],
-    },
-    resume: {
-      title: 'Resume Quick Access',
-      actions: [
-        { label: 'Download PDF', action: 'download' },
-        { label: 'View Online', action: 'view' },
-        { label: 'Share Link', action: 'share' },
       ],
     },
   }
@@ -273,28 +264,6 @@ export default function CommandCenter() {
                                 <div className="text-3xl font-bold text-cloud-accent mb-2">{stat.value}</div>
                                 <div className="text-sm text-gray-400">{stat.label}</div>
                               </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {activeTab === 'resume' && (
-                        <div>
-                          <h3 className="text-xl font-bold text-white mb-6">{dashboardData.resume.title}</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            {dashboardData.resume.actions.map((action, index) => (
-                              <motion.button
-                                key={action.label}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="glass rounded-xl p-6 text-center hover:glow-blue transition-all"
-                              >
-                                <FileText className="w-8 h-8 text-cloud-accent mx-auto mb-3" />
-                                <span className="text-white font-medium">{action.label}</span>
-                              </motion.button>
                             ))}
                           </div>
                         </div>

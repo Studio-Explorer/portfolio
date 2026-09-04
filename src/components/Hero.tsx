@@ -1,23 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Cloud, Download, Mail, ArrowRight, Cpu, Database, Network } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { Cloud, ArrowRight, Cpu, Database, Network } from 'lucide-react'
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 20 - 10,
-        y: (e.clientY / window.innerHeight) * 20 - 10,
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
 
   const floatingBadges = [
     { icon: Cloud, label: 'AWS', color: 'text-orange-400' },
@@ -32,18 +18,66 @@ export default function Hero() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-cloud-dark via-cloud-darker to-cloud-dark opacity-50" />
         
+        {/* Animated gradient blobs */}
+        <motion.div
+          className="absolute w-96 h-96 bg-cloud-accent/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -100, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          style={{ top: '10%', left: '10%' }}
+        />
+        
+        <motion.div
+          className="absolute w-80 h-80 bg-cloud-secondary/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, -80, 0],
+            y: [0, 80, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+          style={{ top: '60%', right: '10%' }}
+        />
+        
+        <motion.div
+          className="absolute w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, 60, 0],
+            y: [0, -60, 0],
+            scale: [1, 1.4, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+          style={{ bottom: '20%', left: '30%' }}
+        />
+        
         {/* Floating particles */}
-        {[...Array(50)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-cloud-accent rounded-full opacity-20"
+            className="absolute w-1 h-1 bg-cloud-accent rounded-full opacity-30"
             initial={{ x: 0, y: 0 }}
             animate={{
-              y: [0, -100],
-              opacity: [0.2, 0.5, 0.2],
+              y: [0, -80],
+              opacity: [0.3, 0.6, 0.3],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: Math.random() * 8 + 8,
               repeat: Infinity,
               delay: Math.random() * 5,
             }}
@@ -51,22 +85,6 @@ export default function Hero() {
               left: `${(i * 37) % 100}%`,
               top: `${(i * 61) % 100}%`,
             }}
-          />
-        ))}
-
-        {/* Data lines */}
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={`line-${i}`}
-            className="absolute h-px bg-gradient-to-r from-transparent via-cloud-accent to-transparent opacity-30"
-            initial={{ width: 0, x: Math.random() * 100 + '%' }}
-            animate={{ width: [0, 300, 0], x: [0, 100, 200] }}
-            transition={{
-              duration: Math.random() * 5 + 5,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-            }}
-            style={{ top: `${Math.random() * 100}%` }}
           />
         ))}
       </div>
@@ -77,9 +95,6 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          style={{
-            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-          }}
         >
           <motion.h1
             className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-white via-cloud-accent to-white bg-clip-text text-transparent"
@@ -127,16 +142,6 @@ export default function Hero() {
               </span>
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
             </button>
-
-            <button className="group px-8 py-4 glass text-white font-semibold rounded-lg flex items-center gap-2 hover:bg-white/10 transition-all">
-              <Download className="w-4 h-4" />
-              Download Resume
-            </button>
-
-            <button className="group px-8 py-4 glass text-white font-semibold rounded-lg flex items-center gap-2 hover:bg-white/10 transition-all">
-              <Mail className="w-4 h-4" />
-              Contact Me
-            </button>
           </motion.div>
 
           {/* Floating Tech Badges */}
@@ -157,17 +162,6 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-cloud-accent rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-cloud-accent rounded-full mt-2 animate-bounce" />
-        </div>
-      </motion.div>
     </section>
   )
 }

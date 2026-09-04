@@ -18,8 +18,8 @@ export default function InteractiveTerminal() {
     whoami: 'laxmikant@cloud-engineer',
     skills: 'AWS, Docker, Linux, Python, Terraform, Kubernetes, CI/CD, Networking',
     status: '● Available for opportunities',
-    projects: '15+ cloud projects completed. Check the Projects section for details.',
-    contact: 'Email: laxmikant@example.com | LinkedIn: /in/laxmikant | GitHub: @laxmikant',
+    projects: '5+ cloud projects completed. Check the Projects section for details.',
+    contact: 'Email: razzkumarpadhi@gmail.com | LinkedIn: /in/laxmikant-padhy-572b4441b/ | GitHub: @laxmikant',
     clear: 'CLEAR',
   }
 
