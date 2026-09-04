@@ -14,10 +14,10 @@ export default function About() {
 
   useEffect(() => {
     const targetCounts = {
-      projects: 15,
-      technologies: 20,
-      certifications: 5,
-      repos: 30,
+      projects: 5,
+      technologies: 6,
+      certifications: 3,
+      repos: 15,
     }
 
     const duration = 2000

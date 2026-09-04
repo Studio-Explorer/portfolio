@@ -165,10 +165,10 @@ export default function LearningJourney() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
         >
           {[
-            { label: 'Total Learning', value: '3+ Years', icon: Calendar },
-            { label: 'Technologies', value: '15+', icon: Code2 },
-            { label: 'Certifications', value: '5+', icon: Award },
-            { label: 'Projects', value: '15+', icon: GitBranch },
+            { label: 'Total Learning', value: '2+ Years', icon: Calendar },
+            { label: 'Technologies', value: '6+', icon: Code2 },
+            { label: 'Certifications', value: '3+', icon: Award },
+            { label: 'Projects', value: '7+', icon: GitBranch },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -201,7 +201,7 @@ export default function LearningJourney() {
           <div className="space-y-8">
             {milestones.map((milestone, index) => (
               <motion.div
-                key={milestone.year}
+                key={`${milestone.year}-${milestone.title}`}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
@@ -374,7 +374,7 @@ export default function LearningJourney() {
           >
             <Award className="w-16 h-16 text-cloud-accent" />
           </motion.div>
-          <h3 className="text-3xl font-bold text-white mb-2">PG Graduation 2028</h3>
+          <h3 className="text-3xl font-bold text-white mb-2">Post Graduation On 2028</h3>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Major milestone achieved! Post Graduation completed with focus on Cloud Computing and DevOps. 
             Ready to take on challenging roles in cloud engineering.

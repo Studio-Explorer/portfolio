@@ -6,10 +6,10 @@ import { Github, Star, GitFork, Activity, Code2, ExternalLink, TrendingUp } from
 export default function GitHubActivity() {
   const githubData = {
     stats: {
-      repositories: 30,
-      stars: 150,
-      forks: 45,
-      contributions: 500,
+      repositories: 12,
+      stars: 45,
+      forks: 26,
+      contributions: 50,
     },
     languages: [
       { name: 'Python', percentage: 35, color: 'bg-green-400' },

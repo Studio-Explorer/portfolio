@@ -100,7 +100,7 @@ export default function Contact() {
                 <MapPin className="w-5 h-5 text-cloud-accent" />
                 <span className="text-white">Location</span>
               </div>
-              <p className="text-gray-400">Available for remote opportunities worldwide</p>
+              <p className="text-gray-400">Chandhighar University, Mohali (Available for remote opportunities)</p>
               
               <div className="flex items-center gap-3 mt-4 mb-4">
                 <Phone className="w-5 h-5 text-cloud-accent" />
