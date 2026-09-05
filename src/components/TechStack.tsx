@@ -114,7 +114,7 @@ export default function TechStack() {
               <div className="relative z-10">
                 <tech.icon className={`w-12 h-12 ${tech.color} mx-auto mb-3 group-hover:scale-110 transition-transform`} />
                 <h3 className="text-lg font-semibold text-white mb-2">{tech.name}</h3>
-                <p className="text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-8 left-0 right-0 px-2">
+                <p className="text-xs text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity mt-2">
                   {tech.description}
                 </p>
               </div>

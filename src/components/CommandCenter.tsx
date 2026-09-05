@@ -8,6 +8,20 @@ export default function CommandCenter() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
 
+  // Function to play click sound using MP3 file
+  const playClickSound = () => {
+    try {
+      const audio = new Audio('/ElevenLabs_A_short,_crisp_digital_button_click_sound,_soft_and_subtle,_with_a_clean_UI_interface_feel_No_mecha.mp3')
+      audio.volume = 0.5
+      audio.currentTime = 0
+      audio.play().catch(error => {
+        console.error('Error playing click sound:', error)
+      })
+    } catch (error) {
+      console.error('Error playing click sound:', error)
+    }
+  }
+
   const tabs = [
     { id: 'overview', label: 'Overview', icon: Activity },
     { id: 'projects', label: 'Projects', icon: FolderKanban },
@@ -47,9 +61,9 @@ export default function CommandCenter() {
     github: {
       title: 'GitHub Activity',
       stats: [
-        { label: 'Repositories', value: 30 },
-        { label: 'Stars', value: 150 },
-        { label: 'Forks', value: 45 },
+        { label: 'Repositories', value: 23 },
+        { label: 'Stars', value: 48 },
+        { label: 'Forks', value: 103 },
         { label: 'Contributions', value: 500 },
       ],
     },
@@ -73,11 +87,56 @@ export default function CommandCenter() {
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 z-40 px-6 py-3 bg-cloud-accent text-cloud-dark font-semibold rounded-full shadow-lg glow-blue flex items-center gap-2 hover:scale-105 transition-transform"
+        onClick={() => {
+          playClickSound()
+          setIsOpen(true)
+        }}
+        className="fixed bottom-8 right-8 z-40 w-14 h-14 bg-gradient-to-br from-cloud-accent to-blue-500 rounded-full shadow-lg glow-blue flex items-center justify-center hover:scale-105 transition-transform"
       >
-        <Cloud className="w-5 h-5" />
-        <span>Command Center</span>
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="relative w-8 h-8"
+        >
+          <motion.div
+            className="absolute inset-0 rounded-full border-2 border-white/30"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute inset-2 rounded-full border-2 border-white/50"
+            animate={{
+              scale: [1, 0.8, 1],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5,
+            }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img
+              src="/6224880.jpg"
+              alt="AI Anime"
+              className="w-10 h-10 rounded-full object-cover"
+            />
+          </div>
+        </motion.div>
       </motion.button>
 
       {/* Command Center Modal */}
@@ -100,9 +159,13 @@ export default function CommandCenter() {
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-white/10 bg-black/50">
                 <div className="flex items-center gap-3">
-                  <Cloud className="w-8 h-8 text-cloud-accent animate-pulse" />
+                  <img
+                    src="/6224880.jpg"
+                    alt="AI Anime"
+                    className="w-12 h-12 rounded-full object-cover animate-pulse"
+                  />
                   <div>
-                    <h2 className="text-2xl font-bold text-white">Cloud Command Center</h2>
+                    <h2 className="text-2xl font-bold text-white">Cloud_Verse</h2>
                     <p className="text-sm text-gray-400">System Dashboard</p>
                   </div>
                 </div>
@@ -112,7 +175,10 @@ export default function CommandCenter() {
                     <span className="text-green-400 text-sm">Online</span>
                   </div>
                   <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      playClickSound()
+                      setIsOpen(false)
+                    }}
                     className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                   >
                     <X className="w-6 h-6 text-white" />
@@ -128,7 +194,10 @@ export default function CommandCenter() {
                       <motion.button
                         key={tab.id}
                         whileHover={{ x: 5 }}
-                        onClick={() => setActiveTab(tab.id)}
+                        onClick={() => {
+                          playClickSound()
+                          setActiveTab(tab.id)
+                        }}
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                           activeTab === tab.id
                             ? 'bg-cloud-accent/20 text-cloud-accent'

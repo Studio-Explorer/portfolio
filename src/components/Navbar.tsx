@@ -10,6 +10,20 @@ export default function Navbar() {
   const { scrollY } = useScroll()
   const backgroundColor = useTransform(scrollY, [0, 100], ['transparent', 'rgba(10, 10, 15, 0.9)'])
 
+  // Function to play click sound using MP3 file
+  const playClickSound = () => {
+    try {
+      const audio = new Audio('/ElevenLabs_A_short,_crisp_digital_button_click_sound,_soft_and_subtle,_with_a_clean_UI_interface_feel_No_mecha.mp3')
+      audio.volume = 0.5
+      audio.currentTime = 0
+      audio.play().catch(error => {
+        console.error('Error playing click sound:', error)
+      })
+    } catch (error) {
+      console.error('Error playing click sound:', error)
+    }
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -54,6 +68,7 @@ export default function Navbar() {
                 href={item.href}
                 className="text-gray-300 hover:text-cloud-accent transition-colors relative group"
                 whileHover={{ scale: 1.05 }}
+                onClick={playClickSound}
               >
                 {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cloud-accent group-hover:w-full transition-all duration-300" />
@@ -84,7 +99,10 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className="text-gray-300 hover:text-cloud-accent transition-colors px-4 py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    playClickSound()
+                    setIsMobileMenuOpen(false)
+                  }}
                 >
                   {item.name}
                 </a>

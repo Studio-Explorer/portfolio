@@ -29,19 +29,19 @@ export default function Contact() {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: '/in/laxmikant-padhy-572b4441b/',
+      value: "Let's Connect",
       href: 'https://www.linkedin.com/in/laxmikant-padhy-572b4441b/',
     },
     {
       icon: Github,
       label: 'GitHub',
-      value: '@laxmikant',
+      value: 'Check My Code',
       href: 'https://github.com/laxmikant',
     },
     {
       icon: FileText,
       label: 'Resume',
-      value: 'Download PDF',
+      value: 'Get My Resume',
       href: '/resume.pdf',
     },
   ]
