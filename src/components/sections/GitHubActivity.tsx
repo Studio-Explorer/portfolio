@@ -2,84 +2,29 @@
 
 import { motion } from 'framer-motion'
 import { Github, Star, GitFork, Activity, Code2, ExternalLink, TrendingUp } from 'lucide-react'
+import { githubStats, topLanguages, recentRepos, githubProfileUrl, contributionDays } from '@/data/github'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 
 export default function GitHubActivity() {
-  const githubData = {
-    stats: {
-      repositories: 12,
-      stars: 45,
-      forks: 26,
-      contributions: 50,
-    },
-    languages: [
-      { name: 'Python', percentage: 35, color: 'bg-green-400' },
-      { name: 'JavaScript', percentage: 25, color: 'bg-yellow-400' },
-      { name: 'TypeScript', percentage: 20, color: 'bg-blue-400' },
-      { name: 'Shell', percentage: 15, color: 'bg-gray-400' },
-      { name: 'HCL', percentage: 5, color: 'bg-purple-400' },
-    ],
-    recentRepos: [
-      {
-        name: 'cloud-automation',
-        description: 'Infrastructure automation using Terraform and Ansible',
-        stars: 25,
-        forks: 8,
-        language: 'Python',
-        updatedAt: '2 days ago',
-      },
-      {
-        name: 'k8s-cluster-setup',
-        description: 'Production-ready Kubernetes cluster with monitoring',
-        stars: 18,
-        forks: 5,
-        language: 'Shell',
-        updatedAt: '1 week ago',
-      },
-      {
-        name: 'serverless-api',
-        description: 'AWS Lambda API Gateway project',
-        stars: 12,
-        forks: 3,
-        language: 'TypeScript',
-        updatedAt: '2 weeks ago',
-      },
-      {
-        name: 'docker-templates',
-        description: 'Collection of Dockerfile templates for various stacks',
-        stars: 20,
-        forks: 7,
-        language: 'Shell',
-        updatedAt: '3 weeks ago',
-      },
-    ],
-  }
+  const stats = [
+    { label: 'Repositories', value: githubStats.repositories, icon: Github },
+    { label: 'Stars', value: githubStats.stars, icon: Star },
+    { label: 'Forks', value: githubStats.forks, icon: GitFork },
+    { label: 'Contributions', value: githubStats.contributions, icon: Activity },
+  ]
 
   return (
     <section id="github-activity" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-cloud-accent bg-clip-text text-transparent">
-            GitHub Activity
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Dynamic overview of repositories, contributions, and coding activity
-          </p>
-        </motion.div>
+        <SectionHeader
+          badge="GitHub"
+          title="GitHub Activity"
+          subtitle="Dynamic overview of repositories, contributions, and coding activity"
+        />
 
-        {/* Stats Grid */}
+        {/* Stats grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-          {[
-            { label: 'Repositories', value: githubData.stats.repositories, icon: Github },
-            { label: 'Stars', value: githubData.stats.stars, icon: Star },
-            { label: 'Forks', value: githubData.stats.forks, icon: GitFork },
-            { label: 'Contributions', value: githubData.stats.contributions, icon: Activity },
-          ].map((stat, index) => (
+          {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
@@ -97,7 +42,7 @@ export default function GitHubActivity() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Languages */}
+          {/* Top languages */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -109,9 +54,9 @@ export default function GitHubActivity() {
               <Code2 className="w-5 h-5 text-cloud-accent" />
               Top Languages
             </h3>
-            
+
             <div className="space-y-4">
-              {githubData.languages.map((lang, index) => (
+              {topLanguages.map((lang, index) => (
                 <div key={lang.name}>
                   <div className="flex justify-between mb-2">
                     <span className="text-white font-medium">{lang.name}</span>
@@ -131,7 +76,7 @@ export default function GitHubActivity() {
             </div>
           </motion.div>
 
-          {/* Recent Repositories */}
+          {/* Recent repositories */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -143,17 +88,20 @@ export default function GitHubActivity() {
               <TrendingUp className="w-5 h-5 text-cloud-accent" />
               Recent Repositories
             </h3>
-            
+
             <div className="space-y-4">
-              {githubData.recentRepos.map((repo, index) => (
-                <motion.div
+              {recentRepos.map((repo, index) => (
+                <motion.a
                   key={repo.name}
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ scale: 1.02, x: 5 }}
-                  className="p-4 glass-dark rounded-lg cursor-pointer group"
+                  className="block p-4 glass-dark rounded-lg cursor-pointer group"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <h4 className="text-white font-semibold group-hover:text-cloud-accent transition-colors">
@@ -161,9 +109,9 @@ export default function GitHubActivity() {
                     </h4>
                     <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-cloud-accent transition-colors" />
                   </div>
-                  
+
                   <p className="text-sm text-gray-400 mb-3">{repo.description}</p>
-                  
+
                   <div className="flex items-center gap-4 text-xs text-gray-500">
                     <span className="flex items-center gap-1">
                       <Star className="w-3 h-3" />
@@ -179,13 +127,13 @@ export default function GitHubActivity() {
                     </span>
                     <span>{repo.updatedAt}</span>
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
           </motion.div>
         </div>
 
-        {/* Contribution Activity Graph */}
+        {/* Contribution activity graph */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -197,9 +145,9 @@ export default function GitHubActivity() {
             <Activity className="w-5 h-5 text-cloud-accent" />
             Contribution Activity
           </h3>
-          
+
           <div className="grid grid-cols-7 gap-2">
-            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+            {contributionDays.map((day) => (
               <div key={day} className="text-center">
                 <div className="text-xs text-gray-500 mb-2">{day}</div>
                 <div className="space-y-1">
@@ -217,7 +165,7 @@ export default function GitHubActivity() {
                           'rgba(0, 212, 255, 0.3)',
                           'rgba(0, 212, 255, 0.5)',
                           'rgba(0, 212, 255, 0.8)',
-                        ][Math.floor(Math.random() * 4)],
+                        ][(contributionDays.indexOf(day) * 4 + i) % 4],
                       }}
                     />
                   ))}
@@ -225,7 +173,7 @@ export default function GitHubActivity() {
               </div>
             ))}
           </div>
-          
+
           <div className="flex items-center justify-between mt-4 text-xs text-gray-500">
             <span>Less</span>
             <div className="flex gap-1">
@@ -241,7 +189,7 @@ export default function GitHubActivity() {
           </div>
         </motion.div>
 
-        {/* GitHub Profile Link */}
+        {/* GitHub profile link */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -250,7 +198,7 @@ export default function GitHubActivity() {
           className="mt-8 text-center"
         >
           <a
-            href="https://github.com/yourusername"
+            href={githubProfileUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 glass rounded-lg hover:bg-white/10 transition-colors"

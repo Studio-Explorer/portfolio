@@ -1,0 +1,66 @@
+import { Award } from 'lucide-react'
+import type { Certification } from '@/types'
+
+/** Free beginner learning resources displayed as certification opportunities. */
+export const certifications: Certification[] = [
+  {
+    id: 1,
+    name: 'Linux Foundation Courses',
+    issuer: 'Linux Foundation',
+    date: 'Free learning',
+    skills: ['Linux Basics', 'System Administration', 'Command Line', 'Open Source'],
+    verification: 'https://training.linuxfoundation.org/training/developing-secure-software-lfd121/',
+    icon: Award,
+    color: 'text-yellow-400',
+  },
+  {
+    id: 2,
+    name: 'AWS Skill Builder Badges',
+    issuer: 'Amazon Web Services',
+    date: 'Free learning',
+    skills: ['AWS Cloud Fundamentals', 'AWS Services', 'Cloud Architecture', 'Badges'],
+    verification: 'https://explore.skillbuilder.aws/',
+    icon: Award,
+    color: 'text-blue-400',
+  },
+  {
+    id: 3,
+    name: 'OpenSSF Secure Software Development',
+    issuer: 'OpenSSF / Linux Foundation',
+    date: 'Free learning',
+    skills: ['Secure Coding', 'Software Supply Chain', 'Cybersecurity Basics', 'Open Source Security'],
+    verification: 'https://training.linuxfoundation.org/resources/free-courses/',
+    icon: Award,
+    color: 'text-cyan-400',
+  },
+  {
+    id: 4,
+    name: 'Kubernetes Learning Resources',
+    issuer: 'Kubernetes',
+    date: 'Free learning',
+    skills: ['Containers', 'Pods', 'Services', 'Cluster Basics'],
+    verification: 'https://kubernetes.io/docs/tutorials/kubernetes-basics/',
+    icon: Award,
+    color: 'text-blue-500',
+  },
+  {
+    id: 5,
+    name: 'Docker Learning Resources',
+    issuer: 'Docker',
+    date: 'Free learning',
+    skills: ['Containers', 'Dockerfile', 'Docker Compose', 'Image Management'],
+    verification: 'https://docs.docker.com/get-started/',
+    icon: Award,
+    color: 'text-sky-400',
+  },
+  {
+    id: 6,
+    name: 'AWS Cloud Security Learning',
+    issuer: 'Amazon Web Services',
+    date: 'Free learning',
+    skills: ['Cloud Security', 'Identity and Access', 'Threat Detection', 'Security Best Practices'],
+    verification: 'https://explore.skillbuilder.aws/learn',
+    icon: Award,
+    color: 'text-purple-400',
+  },
+]

@@ -1,12 +1,13 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { site } from "@/data/site"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Laxmikant | Cloud Engineer",
-  description: "Cloud Engineer Portfolio - AWS, Docker, Kubernetes, DevOps",
+  title: `${site.name} | ${site.role}`,
+  description: `${site.headline} — portfolio featuring AWS, Docker, Kubernetes, and DevOps projects.`,
 }
 
 export default function RootLayout({

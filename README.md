@@ -122,15 +122,39 @@ npm start
 
 ## 🎯 Customization
 
+### Project Structure
+
+```
+src/
+├── app/                  # Next.js app router (layout, page, globals.css)
+├── components/
+│   ├── layout/           # Navbar
+│   ├── sections/         # Page sections (Hero, About, Projects, ...)
+│   ├── ui/               # Shared primitives (SectionHeader, FadeIn)
+│   └── widgets/          # Floating widgets (CommandCenter, Terminal)
+├── data/                 # All portfolio content — edit these to customize
+├── lib/                  # Utilities (cn, playClickSound)
+└── types/                # Shared TypeScript interfaces
+```
+
 ### Update Personal Information
 
-1. **Hero Section**: Update name and tagline in `src/components/Hero.tsx`
-2. **About Section**: Modify introduction and statistics in `src/components/About.tsx`
-3. **Projects**: Add your real projects in `src/components/Projects.tsx`
-4. **GitHub**: Update GitHub data in `src/components/GitHubActivity.tsx`
-5. **Contact**: Update contact information in `src/components/Contact.tsx`
-6. **Certifications**: Add your certifications in `src/components/Certifications.tsx`
-7. **Learning Journey**: Update your timeline in `src/components/LearningJourney.tsx`
+All content lives in `src/data/` — update these files and every section reflects the change:
+
+1. **Personal info, links, stats**: `src/data/site.ts`
+2. **Hero name/tagline**: `src/data/site.ts` (used by `sections/Hero.tsx`)
+3. **About bio & cards**: `src/data/about.ts`
+4. **Tech stack**: `src/data/tech-stack.ts`
+5. **Projects**: `src/data/projects.ts`
+6. **Skills**: `src/data/skills.ts`
+7. **Certifications**: `src/data/certifications.ts`
+8. **GitHub activity**: `src/data/github.ts`
+9. **Learning journey**: `src/data/journey.ts`
+10. **Contact links**: `src/data/site.ts` + `src/components/sections/Contact.tsx`
+11. **Navigation**: `src/data/navigation.ts`
+12. **Architecture Lab**: `src/data/architecture.ts`
+
+> **Note:** Project `github`/`demo` URLs and GitHub stats in `src/data/` are placeholders — replace them with your real links before deploying.
 
 ### Update Colors
 
@@ -150,7 +174,7 @@ colors: {
 
 ### Update Skills
 
-Modify skills data in `src/components/SkillsDashboard.tsx` and `src/components/TechStack.tsx`
+Modify skills data in `src/data/skills.ts` and `src/data/tech-stack.ts`
 
 ## 🚀 Deployment
 

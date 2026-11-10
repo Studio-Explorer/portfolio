@@ -3,25 +3,14 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Terminal, X, Minimize, Maximize2 } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
+import { terminalWelcome, terminalCommands, quickCommands, type TerminalLine } from '@/data/terminal'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 
 export default function InteractiveTerminal() {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
-  const [output, setOutput] = useState([
-    { type: 'command', text: 'Welcome to Laxmikant\'s Cloud Terminal' },
-    { type: 'output', text: 'Type "help" to see available commands' },
-  ])
+  const [output, setOutput] = useState<TerminalLine[]>(terminalWelcome)
   const inputRef = useRef<HTMLInputElement>(null)
-
-  const commands: Record<string, string> = {
-    help: 'Available commands: whoami, skills, status, projects, contact, clear',
-    whoami: 'laxmikant@cloud-engineer',
-    skills: 'AWS, Docker, Linux, Python, Terraform, Kubernetes, CI/CD, Networking',
-    status: '● Available for opportunities',
-    projects: '5+ cloud projects completed. Check the Projects section for details.',
-    contact: 'Email: razzkumarpadhi@gmail.com | LinkedIn: /in/laxmikant-padhy-572b4441b/ | GitHub: @laxmikant',
-    clear: 'CLEAR',
-  }
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -29,47 +18,46 @@ export default function InteractiveTerminal() {
     }
   }, [isOpen])
 
+  const resetTerminal = () => setOutput(terminalWelcome)
+
   const handleCommand = (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim()) return
 
     const command = input.toLowerCase().trim()
-    const newOutput = [...output, { type: 'command', text: `$ ${input}` }]
+    const newOutput: TerminalLine[] = [...output, { type: 'command', text: `$ ${input}` }]
 
     if (command === 'clear') {
-      setOutput([
-        { type: 'command', text: 'Welcome to Laxmikant\'s Cloud Terminal' },
-        { type: 'output', text: 'Type "help" to see available commands' },
-      ])
-    } else if (commands[command]) {
-      newOutput.push({ type: 'output', text: commands[command] })
+      resetTerminal()
+    } else if (terminalCommands[command]) {
+      newOutput.push({ type: 'output', text: terminalCommands[command] })
+      setOutput(newOutput)
     } else {
       newOutput.push({ type: 'error', text: `Command not found: ${command}. Type "help" for available commands.` })
+      setOutput(newOutput)
     }
 
-    setOutput(newOutput)
     setInput('')
+  }
+
+  const runQuickCommand = (cmd: string) => {
+    setIsOpen(true)
+    setTimeout(() => {
+      setInput(cmd)
+      inputRef.current?.focus()
+    }, 100)
   }
 
   return (
     <section className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-cloud-accent bg-clip-text text-transparent">
-            Interactive Terminal
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Try out some commands in the cloud terminal
-          </p>
-        </motion.div>
+        <SectionHeader
+          badge="Terminal"
+          title="Interactive Terminal"
+          subtitle="Try out some commands in the cloud terminal"
+        />
 
-        {/* Terminal Toggle Button */}
+        {/* Terminal toggle */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -89,7 +77,7 @@ export default function InteractiveTerminal() {
           </motion.button>
         </motion.div>
 
-        {/* Terminal Window */}
+        {/* Terminal window */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -99,7 +87,7 @@ export default function InteractiveTerminal() {
               className="mt-8 max-w-4xl mx-auto"
             >
               <div className="glass-dark rounded-xl overflow-hidden border border-cloud-accent/30">
-                {/* Terminal Header */}
+                {/* Terminal header */}
                 <div className="flex items-center justify-between px-4 py-3 bg-black/50 border-b border-white/10">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -117,7 +105,7 @@ export default function InteractiveTerminal() {
                   </div>
                 </div>
 
-                {/* Terminal Body */}
+                {/* Terminal body */}
                 <div className="p-4 font-mono text-sm h-80 overflow-y-auto bg-black/80">
                   {output.map((line, index) => (
                     <motion.div
@@ -126,17 +114,17 @@ export default function InteractiveTerminal() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3 }}
                       className={`mb-2 ${
-                        line.type === 'command' 
-                          ? 'text-cloud-accent' 
-                          : line.type === 'error' 
-                          ? 'text-red-400' 
+                        line.type === 'command'
+                          ? 'text-cloud-accent'
+                          : line.type === 'error'
+                          ? 'text-red-400'
                           : 'text-gray-300'
                       }`}
                     >
                       {line.text}
                     </motion.div>
                   ))}
-                  
+
                   {/* Input line */}
                   <form onSubmit={handleCommand} className="flex items-center mt-4">
                     <span className="text-cloud-accent mr-2">$</span>
@@ -164,20 +152,12 @@ export default function InteractiveTerminal() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-3 mt-8"
           >
-            {['whoami', 'skills', 'status', 'help'].map((cmd) => (
+            {quickCommands.map((cmd) => (
               <motion.button
                 key={cmd}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setIsOpen(true)
-                  setTimeout(() => {
-                    setInput(cmd)
-                    if (inputRef.current) {
-                      inputRef.current.focus()
-                    }
-                  }, 100)
-                }}
+                onClick={() => runQuickCommand(cmd)}
                 className="px-4 py-2 glass rounded-lg text-sm text-gray-300 hover:text-cloud-accent hover:bg-white/10 transition-all"
               >
                 {cmd}

@@ -1,78 +1,29 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Activity, Cpu, Terminal, Container, Lock, Shield, Cloud, Code2, Workflow, FolderKanban, Award, Calendar, GitBranch } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { Activity, Shield } from 'lucide-react'
+import { skills, dashboardMetrics } from '@/data/skills'
+import { siteStats } from '@/data/site'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 
 export default function SkillsDashboard() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [animatedWidths, setAnimatedWidths] = useState({
-    aws: 0,
-    linux: 0,
-    python: 0,
-    docker: 0,
-    terraform: 0,
-    kubernetes: 0,
-  })
-
-  const skills = [
-    { name: 'AWS', level: 85, icon: Cloud, color: 'bg-orange-400' },
-    { name: 'Linux', level: 78, icon: Terminal, color: 'bg-yellow-400' },
-    { name: 'Python', level: 72, icon: Code2, color: 'bg-green-400' },
-    { name: 'Docker', level: 68, icon: Container, color: 'bg-blue-400' },
-    { name: 'Terraform', level: 75, icon: Workflow, color: 'bg-purple-400' },
-    { name: 'Kubernetes', level: 65, icon: Cpu, color: 'bg-cyan-400' },
-  ]
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          // Animate progress bars
-          setTimeout(() => {
-            setAnimatedWidths({
-              aws: 85,
-              linux: 78,
-              python: 72,
-              docker: 68,
-              terraform: 75,
-              kubernetes: 65,
-            })
-          }, 500)
-        }
-      },
-      { threshold: 0.3 }
-    )
-
-    const section = document.getElementById('skills')
-    if (section) {
-      observer.observe(section)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <section id="skills" className="py-20 px-4 bg-gradient-to-b from-transparent to-cloud-darker">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-cloud-accent bg-clip-text text-transparent">
-            Skills Dashboard
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Cloud monitoring dashboard style visualization of technical expertise
-          </p>
-        </motion.div>
+        <SectionHeader
+          badge="Skills"
+          title="Skills Dashboard"
+          subtitle="Cloud monitoring dashboard style visualization of technical expertise"
+        />
 
         {/* Dashboard-style layout */}
-        <div className="glass rounded-2xl p-8 border border-cloud-accent/20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="glass rounded-2xl p-8 border border-cloud-accent/20"
+        >
           {/* Dashboard header */}
           <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
             <div className="flex items-center gap-3">
@@ -103,20 +54,16 @@ export default function SkillsDashboard() {
                   </div>
                   <motion.span
                     className="text-cloud-accent font-mono"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isVisible ? 1 : 0 }}
                   >
-                    {isVisible ? skill.level : 0}%
+                    {skill.level}%
                   </motion.span>
                 </div>
-                
+
                 {/* Progress bar with terminal effect */}
                 <div className="h-4 bg-black/50 rounded-lg overflow-hidden relative">
-                  <motion.div
+                  <div
                     className={`h-full ${skill.color} relative`}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${animatedWidths[skill.name.toLowerCase() as keyof typeof animatedWidths] || 0}%` }}
-                    transition={{ duration: 1.5, ease: 'easeOut' }}
+                    style={{ width: `${skill.level}%` }}
                   >
                     {/* Animated scan line */}
                     <motion.div
@@ -124,8 +71,8 @@ export default function SkillsDashboard() {
                       animate={{ x: ['-100%', '100%'] }}
                       transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                     />
-                  </motion.div>
-                  
+                  </div>
+
                   {/* Grid lines */}
                   <div className="absolute inset-0 flex">
                     {[...Array(10)].map((_, i) => (
@@ -147,23 +94,18 @@ export default function SkillsDashboard() {
           >
             <div className="flex items-center gap-4">
               <span>STATUS: OPERATIONAL</span>
-              <span>UPTIME: 99.9%</span>
+              <span>UPTIME: {siteStats.uptime}</span>
             </div>
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-green-400" />
               <span>SECURE</span>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Additional metrics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-          {[
-            { label: 'Projects', value: '5', icon: FolderKanban },
-            { label: 'Certifications', value: '5', icon: Award },
-            { label: 'Years Exp', value: '2+', icon: Calendar },
-            { label: 'Contributions', value: '500+', icon: GitBranch },
-          ].map((metric, index) => (
+          {dashboardMetrics.map((metric, index) => (
             <motion.div
               key={metric.label}
               initial={{ opacity: 0, y: 20 }}
